@@ -1,4 +1,4 @@
-# OptimaAI_UW  
+## OptimaAI_UW  
 AI‑Driven Underwriting & Compliance Intelligence Engine
 
 OptimaAI_UW is a modular, agent‑orchestrated underwriting intelligence system designed to read complex documents, normalize data, evaluate eligibility, apply compliance rules, and generate audit‑grade summaries — all through a deterministic DAG‑based architecture.
@@ -48,7 +48,7 @@ The orchestrator executes agents in a **directed acyclic graph**, ensuring:
 
 - deterministic execution  
 - parallelizable branches  
-- dependency‑aware ordering  
+- dependency‑aware ordering     
 - full lineage tracking  
 
 This makes the system predictable, debuggable, and audit‑friendly.
