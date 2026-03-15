@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+env/
+ENV/
+
+# Environment variables
+.env
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Large artifacts
+*.pdf
+*.zip
+*.log
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+env/
+ENV/
+
+# Environment variables
+.env
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Large artifacts
+*.pdf
+*.zip
+*.log
+

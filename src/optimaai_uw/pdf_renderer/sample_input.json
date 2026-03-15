@@ -1,0 +1,109 @@
+{
+  "customer": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "dob": "1985-01-01",
+    "state": "CA"
+  },
+
+  "policy": {
+    "productType": "Auto",
+    "requestedCoverageAmount": 100000,
+    "requestedTerm": 12,
+    "effectiveDate": "2026-03-01"
+  },
+
+  "scoring": {
+    "score": 72,
+    "riskTier": "Preferred",
+    "modelVersion": "1.0.0"
+  },
+
+  "eligibility": {
+    "eligible": true,
+    "reason": "Meets all underwriting criteria"
+  },
+
+  "underwritingSummary": {
+    "decision": "APPROVE",
+    "riskScore": 72,
+    "premiumAdjustment": "Standard",
+    "factorsConsidered": "Clean driving record, low mileage",
+    "humanReviewRequired": "No"
+  },
+
+  "riskNarrative": {
+    "summary": "Applicant presents low overall risk.",
+    "positiveFactors": ["Clean driving record", "Low mileage"],
+    "negativeFactors": []
+  },
+
+  "coverage": {
+    "basePremium": 800,
+    "adjustedPremium": 1200,
+    "riders": [
+      { "name": "Collision", "cost": 200, "limit": 50000, "deductible": 500, "included": true },
+      { "name": "Comprehensive", "cost": 150, "limit": 30000, "deductible": 250, "included": true }
+    ],
+    "fullCoverage": true,
+    "coverageNarrative": "Full coverage selected with collision and comprehensive."
+  },
+
+  "pricing": {
+    "basePremium": 800,
+    "driverImpact": 50,
+    "vehicleImpact": 75,
+    "zipImpact": 25,
+    "coverageImpact": 250,
+    "discounts": -100,
+    "surcharges": 0,
+    "pricingNarrative": "Driver and vehicle factors slightly increased premium; discounts applied."
+  },
+
+  "compliance": {
+    "state": "CA",
+    "overallStatus": "PASS",
+    "notes": "All CA rules satisfied.",
+    "rulesChecked": [
+      { "ruleId": "CA-001", "description": "Minimum liability requirement", "passed": true, "severity": "LOW" },
+      { "ruleId": "CA-002", "description": "ZIP code risk validation", "passed": true, "severity": "LOW" }
+    ]
+  },
+
+  "aiInsights": {
+    "extractedEntities": ["Driver age", "Vehicle type"],
+    "riskSignals": ["Low mileage"],
+    "notes": "AI confirms stable risk profile",
+    "driverRiskFactors": "No accidents, no violations.",
+    "pricingRationale": "Low mileage and clean record reduce risk.",
+    "underwritingExplanation": "Applicant meets all underwriting criteria.",
+    "improvementSuggestions": "Maintain safe driving habits."
+  },
+
+  "lineage": {
+    "fields": [
+      {
+        "fieldName": "customer.firstName",
+        "sourceSystem": "Guidewire",
+        "sourcePath": "applicant.name.first",
+        "normalizedPath": "customer.firstName"
+      },
+      {
+        "fieldName": "policy.productType",
+        "sourceSystem": "Guidewire",
+        "sourcePath": "policy.type",
+        "normalizedPath": "policy.productType"
+      }
+    ],
+    "missingFields": [],
+    "missingReasons": []
+  },
+
+  "metadata": {
+    "pipelineVersion": "1.0",
+    "generatedBy": "OptimaAI",
+    "timestamp": "2026-02-19T10:00:00Z"
+  },
+
+  "rawInput": {}
+}

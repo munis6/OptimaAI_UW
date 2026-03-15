@@ -1,0 +1,70 @@
+{
+  "customer": {
+    "firstName": "string",
+    "lastName": "string",
+    "dob": "YYYY-MM-DD",
+    "state": "string"
+  },
+
+  "policy": {
+    "productType": "string",
+    "requestedCoverageAmount": "number",
+    "requestedTerm": "number",
+    "effectiveDate": "YYYY-MM-DD"
+  },
+
+  "scoring": {
+    "score": "number",
+    "riskTier": "string",
+    "modelVersion": "string"
+  },
+
+  "eligibility": {
+    "eligible": "boolean",
+    "reason": "string"
+  },
+
+  "underwritingSummary": {
+    "decision": "APPROVE | REVIEW | DECLINE",
+    "riskScore": "number",
+    "premiumAdjustment": "string",
+    "factorsConsidered": "string",
+    "humanReviewRequired": "Yes | No"
+  },
+
+  "riskNarrative": {
+    "summary": "string",
+    "positiveFactors": ["string"],
+    "negativeFactors": ["string"]
+  },
+
+  "coverage": {
+    "basePremium": "number",
+    "adjustedPremium": "number",
+    "riders": [
+      {
+        "name": "string",
+        "cost": "number"
+      }
+    ]
+  },
+
+  "aiInsights": {
+    "extractedEntities": ["string"],
+    "riskSignals": ["string"],
+    "notes": "string"
+  },
+
+  "compliance": {
+    "stateRulesApplied": ["string"],
+    "regulatoryFlags": ["string"]
+  },
+
+  "metadata": {
+    "pipelineVersion": "string",
+    "generatedBy": "string",
+    "timestamp": "ISO-8601"
+  },
+
+  "rawInput": {}
+}
