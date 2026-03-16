@@ -1,0 +1,81 @@
+Metadata-Version: 2.4
+Name: optimaai_uw
+Version: 0.1.0
+Summary: OptimaAI Underwriting Engine
+Author: Sekhar
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+
+## OptimaAI_UW  
+AI‑Driven Underwriting & Compliance Intelligence Engine
+
+OptimaAI_UW is a modular, agent‑orchestrated underwriting intelligence system designed to read complex documents, normalize data, evaluate eligibility, apply compliance rules, and generate audit‑grade summaries — all through a deterministic DAG‑based architecture.
+
+This project represents the foundation of a next‑generation underwriting platform: explainable, traceable, and built for real‑world insurance workflows.
+
+---
+
+## 🚀 Vision
+
+Underwriting today is slow, manual, and inconsistent.  
+OptimaAI_UW aims to change that by providing:
+
+- **Automated document intelligence**  
+- **Deterministic rule evaluation**  
+- **Transparent decisioning**  
+- **Audit‑ready compliance summaries**  
+- **Agent‑based modularity for rapid iteration**
+
+The goal is simple:  
+**Turn underwriting from a manual bottleneck into a scalable, intelligent workflow.**
+
+---
+
+## 🧠 Architecture Overview
+
+OptimaAI_UW is built on three pillars:
+
+### **1. Agent Layer**
+Each agent performs a single, deterministic task:
+
+- **IntakeAgent** — parses raw input  
+- **NormalizationAgent** — standardizes fields  
+- **HybridNormalizerAgent** — merges structured + unstructured data  
+- **EligibilityAgent** — evaluates product‑level rules  
+- **ComplianceAgent** — applies state‑specific compliance logic  
+- **ScoringAgent** — computes risk scores  
+- **FinalJSONBuilderAgent** — assembles the final underwriting JSON  
+- **UnderwritingSummaryAgent** — produces human‑readable summaries  
+
+Agents are stateless, testable, and independently replaceable.
+
+---
+
+### **2. DAG Orchestrator**
+The orchestrator executes agents in a **directed acyclic graph**, ensuring:
+
+- deterministic execution  
+- parallelizable branches  
+- dependency‑aware ordering     
+- full lineage tracking  
+
+This makes the system predictable, debuggable, and audit‑friendly.
+
+---
+
+### **3. PDF Renderer**
+A modular PDF engine generates:
+
+- compliance summaries  
+- pricing breakdowns  
+- coverage tables  
+- AI insights  
+- decision blocks  
+- risk narratives  
+
+Each component is isolated for easy customization.
+
+---
+
+## 📂 Project Structure
+

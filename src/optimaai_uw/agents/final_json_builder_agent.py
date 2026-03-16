@@ -1,24 +1,44 @@
-from optimaai_uw.core.base_agent import BaseAgent
+# src/optimaai_uw/agents/final_json_builder_agent.py
 
-class FinalJsonBuilderAgent(BaseAgent):
+class FinalJsonBuilderAgent:
     def name(self):
         return "finalJson"
 
     def requires(self):
-        return ["summary", "compliance", "scoring", "eligibility", "normalized"]
+        return ["normalized", "scoring", "eligibility", "underwritingSummary"]
 
     def produces(self):
         return ["finalJson"]
 
     def run(self, context):
-        # Merge all agent outputs into a final JSON structure
-        final_json = {
-            "applicant": context.get("normalized", {}),
-            "eligibility": context.get("eligibility", {}),
-            "scoring": context.get("scoring", {}),
-            "compliance": context.get("compliance", {}),
-            "summary": context.get("summary", {}),
+        n = context["normalized"]
+        s = context["scoring"]
+        e = context["eligibility"]
+        u = context["underwritingSummary"]
+
+        context["finalJson"] = {
+            "customer": {
+                "firstName": n.get("customerFirstName"),
+                "lastName": n.get("customerLastName"),
+                "dob": n.get("customerDOB"),
+                "state": n.get("customerState")
+            },
+            "scoring": s,
+            "eligibility": e,
+            "underwritingSummary": u,
+            "metadata": {
+                "pipelineVersion": "1.0.0",
+                "timestamp": context.get("timestamp"),
+                "transactionId": context.get("intake", {}).get("transactionId"),
+                "sourceSystem": context.get("intake", {}).get("sourceSystem"),
+                "generatedBy": "OptimaAI Underwriting Engine"
+            },
+            "raw": context.get("raw_json", {})
         }
 
-        context["finalJson"] = final_json
         return context
+
+
+# Alias required by tests
+class FinalJSONBuilderAgent(FinalJsonBuilderAgent):
+    pass

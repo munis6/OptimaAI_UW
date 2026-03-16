@@ -1,52 +1,42 @@
 # src/optimaai_uw/agents/underwriting_summary_agent.py
 
-from typing import Dict, Any
 from optimaai_uw.core.base_agent import BaseAgent
-
 
 class UnderwritingSummaryAgent(BaseAgent):
 
-    def name(self) -> str:
-        return "underwriting_summary"
+    def name(self):
+        return "underwritingSummary"
 
     def requires(self):
-        # Must run AFTER eligibility, but also uses normalized + score + compliance
-        return ["eligibility", "normalized", "score", "compliance"]
+        return ["normalized", "scoring", "eligibility"]
 
     def produces(self):
-        return ["uwSummary"]
+        return ["underwritingSummary"]
 
-    def run(self, context: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Produces a clean, human-readable underwriting summary
-        combining:
-        - eligibility decision
-        - risk score
-        - compliance findings
-        - key applicant attributes
-        """
+    def run(self, context):
+        score = context["scoring"]["score"]
+        eligible = context["eligibility"]["eligible"]
 
-        normalized = context.get("normalized", {})
-        score_block = context.get("score", {})
-        compliance_block = context.get("compliance", {})
-        eligibility_block = context.get("eligibility", {})
+        if eligible:
+            factors = [
+                "Customer identity verified",
+                "Risk score evaluated",
+                "Eligibility rules applied",
+                "Eligibility threshold met"
+            ]
+        else:
+            factors = [
+                "Customer identity verified",
+                "Risk score evaluated",
+                "Eligibility rules applied",
+                "Eligibility threshold not met"
+            ]
 
-        # -------------------------
-        # Build Summary
-        #--------------------------
-
-        summary = {
-            "applicantName": f"{normalized.get('firstName', '')} {normalized.get('lastName', '')}".strip(),
-            "state": normalized.get("state"),
-            "productType": normalized.get("productType"),
-            "coverageAmount": normalized.get("requestedCoverageAmount"),
-            "term": normalized.get("requestedTerm"),
-            "riskScore": score_block.get("riskScore"),
-            "riskTier": score_block.get("riskTier"),
-            "compliancePassed": len([r for r in compliance_block.get("results", []) if r.get("status") == "FAIL"]) == 0,
-            "eligibilityDecision": eligibility_block.get("decision"),
-            "eligibilityReason": eligibility_block.get("reason"),
+        context["underwritingSummary"] = {
+            "decision": "APPROVE" if eligible else "REVIEW",
+            "riskScore": score,
+            "humanReviewRequired": "No" if eligible else "Yes",
+            "factorsConsidered": "; ".join(factors)
         }
 
-        context["uwSummary"] = summary
         return context

@@ -1,7 +1,12 @@
-from typing import Any, Dict
-
 class BaseAgent:
-    name: str = "base"
+    def name(self) -> str:
+        raise NotImplementedError
 
-    def run(self, context: Dict[str, Any]) -> Dict[str, Any]:
+    def requires(self):
+        return []
+
+    def produces(self):
+        return []
+
+    def run(self, context):
         raise NotImplementedError

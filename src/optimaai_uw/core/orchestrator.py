@@ -1,36 +1,34 @@
-from typing import Dict, Any, List
+# src/optimaai_uw/core/orchestrator.py
 
-from optimaai_uw.core.base_agent import BaseAgent
-
-# Import all agents used in the legacy linear pipeline
-from optimaai_uw.agents.intake_agent import IntakeAgent
-from optimaai_uw.agents.hybrid_normalizer_agent import HybridNormalizerAgent
+from optimaai_uw.core.DAG_orchestrator import DAGOrchestrator
+from optimaai_uw.agents.intake_agent import DataIntakeAgent
+from optimaai_uw.agents.hybrid_normalizer_agent import NormalizationAgent
+from optimaai_uw.agents.compliance_agent import ComplianceAgent
 from optimaai_uw.agents.eligibility_agent import EligibilityAgent
 from optimaai_uw.agents.scoring_agent import ScoringAgent
-from optimaai_uw.agents.compliance_agent import ComplianceAgent
-from optimaai_uw.agents.final_json_builder_agent import FinalJSONBuilderAgent
 from optimaai_uw.agents.underwriting_summary_agent import UnderwritingSummaryAgent
+from optimaai_uw.agents.final_json_builder_agent import FinalJsonBuilderAgent
 
 
 class Orchestrator:
     """
-    Legacy orchestrator preserved ONLY for backward compatibility with older tests
-    and the PDF generation pipeline. It runs agents in a fixed linear sequence.
+    High-level orchestrator used by the PDF test.
+    It simply wires all agents into the DAG orchestrator.
     """
 
     def __init__(self):
-        # Auto-load agents in the correct order
-        self.agents: List[BaseAgent] = [
-            IntakeAgent(),
-            HybridNormalizerAgent(),
+        self.agents = [
+            DataIntakeAgent(),
+            NormalizationAgent(),
+            ComplianceAgent(),
             EligibilityAgent(),
             ScoringAgent(),
-            ComplianceAgent(),
             UnderwritingSummaryAgent(),
-            FinalJSONBuilderAgent(),
+            FinalJsonBuilderAgent()
         ]
 
-    def execute(self, context: Dict[str, Any]) -> Dict[str, Any]:
-        for agent in self.agents:
-            context = agent.run(context)
-        return context
+    def execute(self, raw_json):
+        dag = DAGOrchestrator(self.agents)
+        return dag.execute(raw_json)
+
+
